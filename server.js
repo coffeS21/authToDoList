@@ -9,7 +9,7 @@ server.use(morgan(`dev`))
 
 mongoose.connect("mongodb://localhost:27017/auth-todos-db", () => console.log('connected to database'))
 //routes
-server.use(`/todos`, require(`./routes/todosRouter.js`))
+server.use(`/todo`, require(`./routes/todoRouter.js`))
 
 server.use((err, req, res, next) => {
     console.log(err)

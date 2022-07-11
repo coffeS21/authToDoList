@@ -1,5 +1,6 @@
 const express = require(`express`)
 const mongoose = require(`mongoose`)
+require(`dotenv`).config()
 const morgan = require(`morgan`)
 const server = express()
 
@@ -7,6 +8,9 @@ const server = express()
 server.use(express.json())
 server.use(morgan(`dev`))
 
+//env file
+process.env.SECRET
+//mogodb server
 mongoose.connect("mongodb://localhost:27017/auth-todos-db", () => console.log('connected to database'))
 //routes
 server.use(`/todo`, require(`./routes/todoRouter.js`))

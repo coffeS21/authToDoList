@@ -4,14 +4,15 @@ require(`dotenv`).config()
 const morgan = require(`morgan`)
 const server = express()
 
+const test = "mongodb+srv://chai:chai123@userauthtodolist.tct8y.mongodb.net/?retryWrites=true&w=majority"
+// mongodb+srv://chai:chai123@userauthtodolist.tct8y.mongodb.net/?retryWrites=true&w=majority
+
 //middlewear
 server.use(express.json())
 server.use(morgan(`dev`))
 
 //env file
 process.env.SECRET
-//mogodb server
-mongoose.connect("mongodb://localhost:27017/auth-todos-db", () => console.log('connected to database'))
 //routes
 server.use(`/todo`, require(`./routes/todoRouter.js`))
 
@@ -20,6 +21,11 @@ server.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 })
 //servers
+
+mongoose.connect(test, () => console.log('connected to database'))
+mongoose.connection.on(`connected`, ()=>{
+    console.log(`mongoose is connected!`)
+})
 server.listen(8000, ()=>{
     console.log(`the server is running`)
 })
